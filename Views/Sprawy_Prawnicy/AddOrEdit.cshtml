@@ -1,0 +1,35 @@
+﻿@model BazyDanych1Projekt.Models.Przypisane
+
+
+
+<h1>AddOrEdit</h1>
+
+<h4>Przypisane</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddOrEdit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @Html.HiddenFor(model => model.IdPrzypisane)
+            <div class="form-group">
+                <label asp-for="IdSprawy" class="control-label"></label>
+                <input asp-for="IdSprawy" class="form-control" />
+                <span asp-validation-for="IdSprawy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdPrawnika" class="control-label"></label>
+                <input asp-for="IdPrawnika" class="form-control" />
+                <span asp-validation-for="IdPrawnika" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+

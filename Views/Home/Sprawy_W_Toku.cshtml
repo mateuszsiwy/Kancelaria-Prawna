@@ -1,0 +1,39 @@
+﻿@model IEnumerable<BazyDanych1Projekt.Models.SprawyWToku>
+
+@{
+    ViewData["Title"] = "Sprawy_W_Toku";
+}
+
+<h1>Sprawy W Toku</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdSprawy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Opis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NazwiskoPrawnika)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdSprawy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Opis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NazwiskoPrawnika)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

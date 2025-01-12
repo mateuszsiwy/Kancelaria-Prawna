@@ -29,3 +29,10 @@ CREATE OR REPLACE VIEW prawnicy_sprawy AS SELECT pr.id_prawnika, pr.imie, pr.naz
                 JOIN sprawa s ON pr.id_sprawy = s.id_sprawy
                 JOIN wynagrodzenie w ON s.stopien_wynagrodzenia = w.stopien_wynagrodzenia
                 GROUP BY p.nazwisko;
+
+
+
+                
+                ALTER TABLE Prawnik ADD CONSTRAINT check_imie CHECK (imie <> ' ');
+                ALTER TABLE Prawnik ADD CONSTRAINT check_nazwisko CHECK (nazwisko <> ' ');
+                ALTER TABLE Sprawa ADD CONSTRAINT check_opis (opis <> ' ');

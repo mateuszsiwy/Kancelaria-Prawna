@@ -8,9 +8,11 @@
     <title>Prawnicy</title>
 </head>
 <body>
-    <h1>Lista Prawników</h1>
-
-    <table border="1">
+    <h1>Sprawy przypisane do prawnikow</h1>
+    <p>
+        <a asp-action="AddOrEdit" asp-controller="sprawy_prawnicy">Dodaj przypisanie</a>
+    </p>
+    <table class="table" border="1">
         <thead>
             <tr>
                 <th>Id Prawnika</th>
@@ -33,7 +35,10 @@
                     <td>@sprawa_prawnik.Opis</td>
                     <td>@sprawa_prawnik.DataZakonczenia</td>
                     <td>@sprawa_prawnik.StopienWynagrodzenia</td>
+                    <td><a asp-action="AddOrEdit" asp-controller="sprawy_prawnicy" asp-route-IdPrawnika="@sprawa_prawnik.IdPrawnika" asp-route-IdSprawy="@sprawa_prawnik.IdSprawy">Edytuj</a></td>
+                    <td><a asp-action="Delete" asp-controller="sprawy_prawnicy" asp-route-IdPrawnika="@sprawa_prawnik.IdPrawnika" asp-route-IdSprawy="@sprawa_prawnik.IdSprawy">Usun</a></td>
                 </tr>
+
             }
         </tbody>
     </table>

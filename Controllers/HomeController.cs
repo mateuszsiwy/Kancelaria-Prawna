@@ -211,6 +211,54 @@ namespace BazyDanych1Projekt.Controllers
             return View(prawnicy_zarobki);
         }
 
+        public IActionResult Liczba_Spraw_Prawnika()
+        {
+            var liczba_spraw_prawnika = new List<LiczbaSprawPrawnika>();
+            string query = "SELECT * FROM liczba_spraw_prawnika";
+            using (var cmd = new NpgsqlCommand(query, _dbConnection))
+            {
+                _dbConnection.Open();
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        liczba_spraw_prawnika.Add(new LiczbaSprawPrawnika
+                        {
+                            Nazwisko = reader.GetString(0),
+                            LiczbaSpraw = reader.GetInt32(1)
+                        });
+                    }
+                }
+                _dbConnection.Close();
+            }
+
+            return View(liczba_spraw_prawnika);
+        }
+
+        public IActionResult Sprawy_W_Toku()
+        {
+            var sprawy_w_toku = new List<SprawyWToku>();
+            string query = "SELECT * FROM sprawy_w_toku";
+            using (var cmd = new NpgsqlCommand(query, _dbConnection))
+            {
+                _dbConnection.Open();
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        sprawy_w_toku.Add(new SprawyWToku
+                        {
+                            IdSprawy = reader.GetInt32(0),
+                            Opis = reader.GetString(1),
+                            NazwiskoPrawnika = reader.GetString(2)
+                        });
+                    }
+                }
+                _dbConnection.Close();
+            }
+
+            return View(sprawy_w_toku);
+        }
 
 
     }
