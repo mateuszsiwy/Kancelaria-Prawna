@@ -1,0 +1,31 @@
+CREATE OR REPLACE VIEW prawnicy_sprawy AS SELECT pr.id_prawnika, pr.imie, pr.nazwisko, s.id_sprawy, s.opis, s.data_zakonczenia, s.stopien_wynagrodzenia 
+                FROM prawnik pr JOIN przypisane p ON pr.id_prawnika = p.id_prawnika
+                    JOIN sprawa s on p.id_sprawy = s.id_sprawy;
+                
+                CREATE OR REPLACE FUNCTION on_delete_prawnik() RETURNS TRIGGER AS $$
+                BEGIN
+                    DELETE FROM przypisane WHERE id_prawnika = OLD.id_prawnika;
+                    RETURN OLD;
+                END;    
+                $$ LANGUAGE plpgsql;
+                
+                CREATE TRIGGER on_delete_prawnik_trigger BEFORE delete ON prawnik
+                FOR EACH ROW EXECUTE FUNCTION on_delete_prawnik();
+
+                CREATE OR REPLACE FUNCTION on_delete_sprawa() RETURNS TRIGGER AS $$
+                BEGIN
+					DELETE FROM przypisane WHERE id_sprawy = OLD.id_sprawy;
+					RETURN OLD;
+				END;
+                $$ LANGUAGE plpgsql;
+
+                CREATE TRIGGER on_delete_sprawa_trigger BEFORE delete ON sprawa
+                FOR EACH ROW EXECUTE FUNCTION on_delete_sprawa();
+
+                CREATE OR REPLACE VIEW prawnicy_zarobki AS 
+                SELECT p.nazwisko, SUM(w.kwota::numeric) AS zarobki
+                FROM prawnik p
+                JOIN przypisane pr ON p.id_prawnika = pr.id_prawnika
+                JOIN sprawa s ON pr.id_sprawy = s.id_sprawy
+                JOIN wynagrodzenie w ON s.stopien_wynagrodzenia = w.stopien_wynagrodzenia
+                GROUP BY p.nazwisko;

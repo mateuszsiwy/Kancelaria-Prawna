@@ -1,0 +1,34 @@
+﻿@model IEnumerable<BazyDanych1Projekt.Models.PrawnicyZarobki>
+
+@{
+    ViewData["Title"] = "Prawnicy_Zarobki";
+}
+
+<h1>Prawnicy_Zarobki</h1>
+
+<a asp-action="prawnicy_zarobki" asp-controller="Home" asp-route-OrderBy="1">Sortuj po zarobkach</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nazwisko)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Zarobki)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nazwisko)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Zarobki)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

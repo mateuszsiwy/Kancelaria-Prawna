@@ -1,0 +1,24 @@
+﻿@model BazyDanych1Projekt.Models.Prawnik
+
+<h4 style="color:purple">
+    <b>Imie:</b>  @ViewBag.Imie <br />
+    <b>Nazwisko:</b> @ViewBag.Nazwisko
+</h4>
+<hr />
+ 
+@using (Html.BeginForm("PrawnikEdit", "Prawnik", FormMethod.Post))
+{ 
+    <table>
+        <tr>
+            <td>Wprowadz Imie: </td>
+            <td>@Html.TextBoxFor(m => m.Imie)</td>
+        </tr>
+        <tr>
+            <td>Wprowadz Nazwisko: </td>
+            <td>@Html.TextBoxFor(m => m.Nazwisko)</td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Submit Form" /></td>
+        </tr>
+    </table>
+}

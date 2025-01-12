@@ -1,0 +1,35 @@
+﻿@model List<Prawnik>
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prawnicy</title>
+</head>
+<body>
+    <h1>Lista Prawników</h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var prawnik in Model)
+            {
+                <tr>
+                    <td>@prawnik.IdPrawnika</td>
+                    <td>@prawnik.Imie</td>
+                    <td>@prawnik.Nazwisko</td>
+                    <td><a asp-action="edit" asp-controller="prawnik" asp-route-id="@prawnik.IdPrawnika">Edytuj</a></td>
+                    <td><a asp-action="delete" asp-controller="prawnik" asp-route-id="@prawnik.IdPrawnika">Usun</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

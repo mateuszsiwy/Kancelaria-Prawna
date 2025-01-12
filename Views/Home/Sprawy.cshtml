@@ -1,0 +1,41 @@
+﻿@model List<Sprawa>
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sprawy</title>
+</head>
+<body>
+    <h1>Lista Spraw</h1>
+
+    <a asp-action="AddOrEdit" asp-controller="sprawa">Dodaj nowa sprawe</a>
+    <br/>
+
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Opis</th>
+                <th>Data zakonczenia</th>
+                <th>Stopien wynagrodzenia</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var sprawa in Model)
+            {
+                <tr>
+                    <td>@sprawa.IdSprawy</td>
+                    <td>@sprawa.Opis</td>
+                    <td>@sprawa.DataZakonczenia</td>
+                    <td>@sprawa.StopienWynagrodzenia</td>
+                    <td><a asp-action="AddOrEdit" asp-controller="sprawa" asp-route-id="@sprawa.IdSprawy">Edytuj</a></td>
+                    <td><a asp-action="delete" asp-controller="sprawa" asp-route-id="@sprawa.IdSprawy">Usun</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

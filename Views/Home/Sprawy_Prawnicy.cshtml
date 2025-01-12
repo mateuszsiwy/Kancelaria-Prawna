@@ -1,0 +1,41 @@
+﻿@model List<SprawyPrawnicy>
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prawnicy</title>
+</head>
+<body>
+    <h1>Lista Prawników</h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Id Prawnika</th>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+                <th>Id Sprawy</th>
+                <th>Opis</th>
+                <th>Data Zakonczenia</th>
+                <th>Stopien Wynagrodzenia</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var sprawa_prawnik in Model)
+            {
+                <tr>
+                    <td>@sprawa_prawnik.IdPrawnika</td>
+                    <td>@sprawa_prawnik.Imie</td>
+                    <td>@sprawa_prawnik.Nazwisko</td>
+                    <td>@sprawa_prawnik.IdSprawy</td>
+                    <td>@sprawa_prawnik.Opis</td>
+                    <td>@sprawa_prawnik.DataZakonczenia</td>
+                    <td>@sprawa_prawnik.StopienWynagrodzenia</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
