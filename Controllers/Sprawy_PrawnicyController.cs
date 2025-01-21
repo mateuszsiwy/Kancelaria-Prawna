@@ -32,12 +32,11 @@ namespace BazyDanych1Projekt.Controllers
                     cmd.ExecuteNonQuery();
                 }
             }
-            catch (Exception ex)
+            catch (PostgresException ex)
             {
-                // Log the exception (you can use any logging framework)
                 Console.WriteLine(ex.Message);
-                // Rethrow the exception to let ASP.NET Core handle it
-                throw;
+                ViewData["ErrorMessage"] = "An error occurred while deleting the record: " + ex.Message;
+                return View("Error");
             }
             finally
             {
@@ -78,12 +77,11 @@ namespace BazyDanych1Projekt.Controllers
                     }
                 }
             }
-            catch (Exception ex)
+            catch (PostgresException ex)
             {
-                // Log the exception (you can use any logging framework)
                 Console.WriteLine(ex.Message);
-                // Rethrow the exception to let ASP.NET Core handle it
-                throw;
+                ViewData["ErrorMessage"] = "An error occurred while retrieving the record: " + ex.Message;
+                return View("Error");
             }
             finally
             {
@@ -123,12 +121,11 @@ namespace BazyDanych1Projekt.Controllers
                     }
                 }
             }
-            catch (Exception ex)
+            catch (PostgresException ex)
             {
-                // Log the exception (you can use any logging framework)
                 Console.WriteLine(ex.Message);
-                // Rethrow the exception to let ASP.NET Core handle it
-                throw;
+                ViewData["ErrorMessage"] = "An error occurred while saving the record: " + ex.Message;
+                return View("Error");
             }
             finally
             {

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Npgsql;
 using BazyDanych1Projekt.Models;
+using System.Collections.Generic;
+
 namespace BazyDanych1Projekt.Controllers
 {
     public class HomeController : Controller
@@ -16,49 +18,79 @@ namespace BazyDanych1Projekt.Controllers
         {
             var prawnicy = new List<Prawnik>();
 
-            string query = "SELECT * FROM Prawnik"; // zapytanie SQL
-            using (var cmd = new NpgsqlCommand(query, _dbConnection))
+            try
             {
-                _dbConnection.Open();
-                using (var reader = cmd.ExecuteReader())
+                string query = "SELECT * FROM Prawnik"; 
+                using (var cmd = new NpgsqlCommand(query, _dbConnection))
                 {
-                    while (reader.Read())
+                    _dbConnection.Open();
+                    using (var reader = cmd.ExecuteReader())
                     {
-                        prawnicy.Add(new Prawnik
+                        while (reader.Read())
                         {
-                            IdPrawnika = reader.GetInt32(0),
-                            Imie = reader.GetString(1),
-                            Nazwisko = reader.GetString(2)
-                        });
+                            prawnicy.Add(new Prawnik
+                            {
+                                IdPrawnika = reader.GetInt32(0),
+                                Imie = reader.GetString(1),
+                                Nazwisko = reader.GetString(2)
+                            });
+                        }
                     }
                 }
-                _dbConnection.Close();
+            }
+            catch (PostgresException ex)
+            {
+                Console.WriteLine(ex.Message);
+                ViewData["ErrorMessage"] = "An error occurred while retrieving the records: " + ex.Message;
+                return View("Error");
+            }
+            finally
+            {
+                if (_dbConnection.State == System.Data.ConnectionState.Open)
+                {
+                    _dbConnection.Close();
+                }
             }
 
-            return View(prawnicy); // przekazanie danych do widoku
+            return View(prawnicy); 
         }
 
         public IActionResult Prawnicy()
         {
             var prawnicy = new List<Prawnik>();
 
-            string query = "SELECT * FROM Prawnik"; // zapytanie SQL
-            using (var cmd = new NpgsqlCommand(query, _dbConnection))
+            try
             {
-                _dbConnection.Open();
-                using (var reader = cmd.ExecuteReader())
+                string query = "SELECT * FROM Prawnik"; 
+                using (var cmd = new NpgsqlCommand(query, _dbConnection))
                 {
-                    while (reader.Read())
+                    _dbConnection.Open();
+                    using (var reader = cmd.ExecuteReader())
                     {
-                        prawnicy.Add(new Prawnik
+                        while (reader.Read())
                         {
-                            IdPrawnika = reader.GetInt32(0),
-                            Imie = reader.GetString(1),
-                            Nazwisko = reader.GetString(2)
-                        });
+                            prawnicy.Add(new Prawnik
+                            {
+                                IdPrawnika = reader.GetInt32(0),
+                                Imie = reader.GetString(1),
+                                Nazwisko = reader.GetString(2)
+                            });
+                        }
                     }
                 }
-                _dbConnection.Close();
+            }
+            catch (PostgresException ex)
+            {
+                Console.WriteLine(ex.Message);
+                ViewData["ErrorMessage"] = "An error occurred while retrieving the records: " + ex.Message;
+                return View("Error");
+            }
+            finally
+            {
+                if (_dbConnection.State == System.Data.ConnectionState.Open)
+                {
+                    _dbConnection.Close();
+                }
             }
 
             return View(prawnicy);
@@ -68,99 +100,123 @@ namespace BazyDanych1Projekt.Controllers
         {
             var sprawy = new List<Sprawa>();
 
-            string query = "SELECT * FROM sprawa where data_zakonczenia is not null"; // zapytanie SQL
-            using (var cmd = new NpgsqlCommand(query, _dbConnection))
+            try
             {
-                _dbConnection.Open();
-                using (var reader = cmd.ExecuteReader())
+                string query = "SELECT * FROM sprawa where data_zakonczenia is not null"; 
+                using (var cmd = new NpgsqlCommand(query, _dbConnection))
                 {
-                    while (reader.Read())
+                    _dbConnection.Open();
+                    using (var reader = cmd.ExecuteReader())
                     {
-
-                        sprawy.Add(new Sprawa
+                        while (reader.Read())
                         {
-                            IdSprawy = reader.GetInt32(0),
-                            Opis = reader.GetString(1),
-                            DataZakonczenia = reader.GetDateTime(2),
-                            StopienWynagrodzenia = reader.GetInt32(3)
-                        });
+                            sprawy.Add(new Sprawa
+                            {
+                                IdSprawy = reader.GetInt32(0),
+                                Opis = reader.GetString(1),
+                                DataZakonczenia = reader.GetDateTime(2),
+                                StopienWynagrodzenia = reader.GetInt32(3)
+                            });
+                        }
                     }
                 }
-                _dbConnection.Close();
-            }
-            string query2 = "SELECT * FROM sprawa where data_zakonczenia is null"; // zapytanie SQL
-            using (var cmd = new NpgsqlCommand(query2, _dbConnection))
-            {
-                _dbConnection.Open();
-                using (var reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
 
-                        sprawy.Add(new Sprawa
+                string query2 = "SELECT * FROM sprawa where data_zakonczenia is null"; 
+                using (var cmd = new NpgsqlCommand(query2, _dbConnection))
+                {
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
                         {
-                            IdSprawy = reader.GetInt32(0),
-                            Opis = reader.GetString(1),
-                            StopienWynagrodzenia = reader.GetInt32(3)
-                        });
+                            sprawy.Add(new Sprawa
+                            {
+                                IdSprawy = reader.GetInt32(0),
+                                Opis = reader.GetString(1),
+                                StopienWynagrodzenia = reader.GetInt32(3)
+                            });
+                        }
                     }
                 }
-                _dbConnection.Close();
+            }
+            catch (PostgresException ex)
+            {
+                Console.WriteLine(ex.Message);
+                ViewData["ErrorMessage"] = "An error occurred while retrieving the records: " + ex.Message;
+                return View("Error");
+            }
+            finally
+            {
+                if (_dbConnection.State == System.Data.ConnectionState.Open)
+                {
+                    _dbConnection.Close();
+                }
             }
 
-
-            return View(sprawy); // przekazanie danych do widoku
+            return View(sprawy);
         }
 
         public IActionResult Sprawy_Prawnicy()
         {
             var sprawy_prawnicy = new List<SprawyPrawnicy>();
 
-            string query = "SELECT * FROM prawnicy_sprawy where data_zakonczenia is not null"; // zapytanie SQL
-            using (var cmd = new NpgsqlCommand(query, _dbConnection))
+            try
             {
-                _dbConnection.Open();
-                using (var reader = cmd.ExecuteReader())
+                string query = "SELECT * FROM prawnicy_sprawy where data_zakonczenia is not null"; 
+                using (var cmd = new NpgsqlCommand(query, _dbConnection))
                 {
-                    while (reader.Read())
+                    _dbConnection.Open();
+                    using (var reader = cmd.ExecuteReader())
                     {
-
-                        sprawy_prawnicy.Add(new SprawyPrawnicy
+                        while (reader.Read())
                         {
-                            IdPrawnika = reader.GetInt32(0),
-                            Imie = reader.GetString(1),
-                            Nazwisko = reader.GetString(2),
-                            IdSprawy = reader.GetInt32(3),
-                            Opis = reader.GetString(4),
-                            DataZakonczenia = reader.GetDateTime(5),
-                            StopienWynagrodzenia = reader.GetInt32(6)
-                        });
+                            sprawy_prawnicy.Add(new SprawyPrawnicy
+                            {
+                                IdPrawnika = reader.GetInt32(0),
+                                Imie = reader.GetString(1),
+                                Nazwisko = reader.GetString(2),
+                                IdSprawy = reader.GetInt32(3),
+                                Opis = reader.GetString(4),
+                                DataZakonczenia = reader.GetDateTime(5),
+                                StopienWynagrodzenia = reader.GetInt32(6)
+                            });
+                        }
                     }
                 }
-                _dbConnection.Close();
-            }
-            string query2 = "SELECT * FROM prawnicy_sprawy where data_zakonczenia is null"; // zapytanie SQL
-            using (var cmd = new NpgsqlCommand(query2, _dbConnection))
-            {
-                _dbConnection.Open();
-                using (var reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
 
-                        sprawy_prawnicy.Add(new SprawyPrawnicy
+                string query2 = "SELECT * FROM prawnicy_sprawy where data_zakonczenia is null"; 
+                using (var cmd = new NpgsqlCommand(query2, _dbConnection))
+                {
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
                         {
-                            IdPrawnika = reader.GetInt32(0),
-                            Imie = reader.GetString(1),
-                            Nazwisko = reader.GetString(2),
-                            IdSprawy = reader.GetInt32(3),
-                            Opis = reader.GetString(4),
-                            StopienWynagrodzenia = reader.GetInt32(6)
-                        });
+                            sprawy_prawnicy.Add(new SprawyPrawnicy
+                            {
+                                IdPrawnika = reader.GetInt32(0),
+                                Imie = reader.GetString(1),
+                                Nazwisko = reader.GetString(2),
+                                IdSprawy = reader.GetInt32(3),
+                                Opis = reader.GetString(4),
+                                StopienWynagrodzenia = reader.GetInt32(6)
+                            });
+                        }
                     }
                 }
-                _dbConnection.Close();
             }
+            catch (PostgresException ex)
+            {
+                Console.WriteLine(ex.Message);
+                ViewData["ErrorMessage"] = "An error occurred while retrieving the records: " + ex.Message;
+                return View("Error");
+            }
+            finally
+            {
+                if (_dbConnection.State == System.Data.ConnectionState.Open)
+                {
+                    _dbConnection.Close();
+                }
+            }
+
             return View(sprawy_prawnicy);
         }
 
@@ -168,8 +224,9 @@ namespace BazyDanych1Projekt.Controllers
         {
             var prawnicy_zarobki = new List<PrawnicyZarobki>();
 
-            if (OrderBy == 0) { 
-                string query = "SELECT * FROM prawnicy_zarobki";
+            try
+            {
+                string query = OrderBy == 0 ? "SELECT * FROM prawnicy_zarobki" : "SELECT * FROM prawnicy_zarobki ORDER BY zarobki ASC";
                 using (var cmd = new NpgsqlCommand(query, _dbConnection))
                 {
                     _dbConnection.Open();
@@ -184,26 +241,18 @@ namespace BazyDanych1Projekt.Controllers
                             });
                         }
                     }
-                    _dbConnection.Close();
                 }
             }
-            else
+            catch (PostgresException ex)
             {
-                string query = "SELECT * FROM prawnicy_zarobki ORDER BY zarobki ASC";
-                using (var cmd = new NpgsqlCommand(query, _dbConnection))
+                Console.WriteLine(ex.Message);
+                ViewData["ErrorMessage"] = "An error occurred while retrieving the records: " + ex.Message;
+                return View("Error");
+            }
+            finally
+            {
+                if (_dbConnection.State == System.Data.ConnectionState.Open)
                 {
-                    _dbConnection.Open();
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            prawnicy_zarobki.Add(new PrawnicyZarobki
-                            {
-                                Nazwisko = reader.GetString(0),
-                                Zarobki = reader.GetDecimal(1)
-                            });
-                        }
-                    }
                     _dbConnection.Close();
                 }
             }
@@ -214,22 +263,38 @@ namespace BazyDanych1Projekt.Controllers
         public IActionResult Liczba_Spraw_Prawnika()
         {
             var liczba_spraw_prawnika = new List<LiczbaSprawPrawnika>();
-            string query = "SELECT * FROM liczba_spraw_prawnika";
-            using (var cmd = new NpgsqlCommand(query, _dbConnection))
+
+            try
             {
-                _dbConnection.Open();
-                using (var reader = cmd.ExecuteReader())
+                string query = "SELECT * FROM liczba_spraw_prawnika";
+                using (var cmd = new NpgsqlCommand(query, _dbConnection))
                 {
-                    while (reader.Read())
+                    _dbConnection.Open();
+                    using (var reader = cmd.ExecuteReader())
                     {
-                        liczba_spraw_prawnika.Add(new LiczbaSprawPrawnika
+                        while (reader.Read())
                         {
-                            Nazwisko = reader.GetString(0),
-                            LiczbaSpraw = reader.GetInt32(1)
-                        });
+                            liczba_spraw_prawnika.Add(new LiczbaSprawPrawnika
+                            {
+                                Nazwisko = reader.GetString(0),
+                                LiczbaSpraw = reader.GetInt32(1)
+                            });
+                        }
                     }
                 }
-                _dbConnection.Close();
+            }
+            catch (PostgresException ex)
+            {
+                Console.WriteLine(ex.Message);
+                ViewData["ErrorMessage"] = "An error occurred while retrieving the records: " + ex.Message;
+                return View("Error");
+            }
+            finally
+            {
+                if (_dbConnection.State == System.Data.ConnectionState.Open)
+                {
+                    _dbConnection.Close();
+                }
             }
 
             return View(liczba_spraw_prawnika);
@@ -238,28 +303,42 @@ namespace BazyDanych1Projekt.Controllers
         public IActionResult Sprawy_W_Toku()
         {
             var sprawy_w_toku = new List<SprawyWToku>();
-            string query = "SELECT * FROM sprawy_w_toku";
-            using (var cmd = new NpgsqlCommand(query, _dbConnection))
+
+            try
             {
-                _dbConnection.Open();
-                using (var reader = cmd.ExecuteReader())
+                string query = "SELECT * FROM sprawy_w_toku";
+                using (var cmd = new NpgsqlCommand(query, _dbConnection))
                 {
-                    while (reader.Read())
+                    _dbConnection.Open();
+                    using (var reader = cmd.ExecuteReader())
                     {
-                        sprawy_w_toku.Add(new SprawyWToku
+                        while (reader.Read())
                         {
-                            IdSprawy = reader.GetInt32(0),
-                            Opis = reader.GetString(1),
-                            NazwiskoPrawnika = reader.GetString(2)
-                        });
+                            sprawy_w_toku.Add(new SprawyWToku
+                            {
+                                IdSprawy = reader.GetInt32(0),
+                                Opis = reader.GetString(1),
+                                NazwiskoPrawnika = reader.GetString(2)
+                            });
+                        }
                     }
                 }
-                _dbConnection.Close();
+            }
+            catch (PostgresException ex)
+            {
+                Console.WriteLine(ex.Message);
+                ViewData["ErrorMessage"] = "An error occurred while retrieving the records: " + ex.Message;
+                return View("Error");
+            }
+            finally
+            {
+                if (_dbConnection.State == System.Data.ConnectionState.Open)
+                {
+                    _dbConnection.Close();
+                }
             }
 
             return View(sprawy_w_toku);
         }
-
-
     }
 }
