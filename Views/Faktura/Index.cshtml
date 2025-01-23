@@ -1,0 +1,40 @@
+@model IEnumerable<BazyDanych1Projekt.Models.Faktura>
+
+@{
+    ViewData["Title"] = "Faktury";
+}
+
+<h2>Faktury</h2>
+
+<p>
+    <a asp-action="AddOrEdit" class="btn btn-primary">Dodaj Fakturę</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>ID Klienta</th>
+            <th>Data Wystawienia</th>
+            <th>Kwota</th>
+            <th>Status</th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.IdFaktury</td>
+                <td>@item.IdKlienta</td>
+                <td>@item.DataWystawienia</td>
+                <td>@item.Kwota</td>
+                <td>@item.Status</td>
+                <td>
+                    <a asp-action="AddOrEdit" asp-route-id="@item.IdFaktury" class="btn btn-warning">Edytuj</a>
+                    <a asp-action="Delete" asp-route-id="@item.IdFaktury" class="btn btn-danger">Usuń</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

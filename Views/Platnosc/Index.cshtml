@@ -1,0 +1,38 @@
+@model IEnumerable<BazyDanych1Projekt.Models.Platnosc>
+
+@{
+    ViewData["Title"] = "Płatności";
+}
+
+<h2>Płatności</h2>
+
+<p>
+    <a asp-action="AddOrEdit" class="btn btn-primary">Dodaj Płatność</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>ID Faktury</th>
+            <th>Data Płatności</th>
+            <th>Kwota</th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.IdPlatnosci</td>
+                <td>@item.IdFaktury</td>
+                <td>@item.DataPlatnosci</td>
+                <td>@item.Kwota</td>
+                <td>
+                    <a asp-action="AddOrEdit" asp-route-id="@item.IdPlatnosci" class="btn btn-warning">Edytuj</a>
+                    <a asp-action="Delete" asp-route-id="@item.IdPlatnosci" class="btn btn-danger">Usuń</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

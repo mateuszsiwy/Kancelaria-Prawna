@@ -1,0 +1,40 @@
+@model IEnumerable<BazyDanych1Projekt.Models.Klient>
+
+@{
+    ViewData["Title"] = "Klienci";
+}
+
+<h2>Klienci</h2>
+
+<p>
+    <a asp-action="AddOrEdit" class="btn btn-primary">Dodaj Klienta</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>Email</th>
+            <th>Telefon</th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.IdKlienta</td>
+                <td>@item.Imie</td>
+                <td>@item.Nazwisko</td>
+                <td>@item.Email</td>
+                <td>@item.Telefon</td>
+                <td>
+                    <a asp-action="AddOrEdit" asp-route-id="@item.IdKlienta" class="btn btn-warning">Edytuj</a>
+                    <a asp-action="Delete" asp-route-id="@item.IdKlienta" class="btn btn-danger">Usuń</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

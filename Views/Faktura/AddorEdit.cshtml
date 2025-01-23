@@ -1,0 +1,29 @@
+@model BazyDanych1Projekt.Models.Faktura
+
+@{
+    ViewData["Title"] = Model.IdFaktury == 0 ? "Dodaj Fakturę" : "Edytuj Fakturę";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="AddOrEdit">
+    <div class="form-group">
+        <label asp-for="IdKlienta" class="control-label"></label>
+        <input asp-for="IdKlienta" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="DataWystawienia" class="control-label"></label>
+        <input asp-for="DataWystawienia" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Kwota" class="control-label"></label>
+        <input asp-for="Kwota" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Status" class="control-label"></label>
+        <input asp-for="Status" class="form-control" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Zapisz" class="btn btn-primary" />
+    </div>
+</form>
