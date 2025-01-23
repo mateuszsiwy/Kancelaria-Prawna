@@ -128,7 +128,6 @@ namespace BazyDanych1Projekt.Controllers
                         cmd.Parameters.AddWithValue("email", klient.Email);
                         cmd.Parameters.AddWithValue("telefon", klient.Telefon);
                         cmd.Parameters.AddWithValue("id", klient.IdKlienta);
-                        cmd.Parameters["id"].NpgsqlDbType = NpgsqlTypes.NpgsqlDbType.Integer;
 
                         cmd.ExecuteNonQuery();
                     }

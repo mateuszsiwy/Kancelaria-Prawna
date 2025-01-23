@@ -59,7 +59,7 @@ namespace BazyDanych1Projekt.Controllers
         public IActionResult AddOrEdit(int id = 0)
         {
             if (id == 0)
-                return View(new Platnosc());
+                return View(new Platnosc { IdPlatnosci = 0 });
             else
             {
                 Platnosc platnosc = null;

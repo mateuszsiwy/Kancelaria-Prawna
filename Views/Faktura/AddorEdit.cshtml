@@ -7,6 +7,7 @@
 <h2>@ViewData["Title"]</h2>
 
 <form asp-action="AddOrEdit">
+    @Html.HiddenFor(model => model.IdFaktury)
     <div class="form-group">
         <label asp-for="IdKlienta" class="control-label"></label>
         <input asp-for="IdKlienta" class="form-control" />

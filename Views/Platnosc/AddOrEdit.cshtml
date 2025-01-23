@@ -1,12 +1,11 @@
 @model BazyDanych1Projekt.Models.Platnosc
 
-@{
-    ViewData["Title"] = Model.IdPlatnosci == 0 ? "Dodaj Płatność" : "Edytuj Płatność";
-}
 
-<h2>@ViewData["Title"]</h2>
 
 <form asp-action="AddOrEdit">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    @Html.HiddenFor(model => model.IdPlatnosci)
     <div class="form-group">
         <label asp-for="IdFaktury" class="control-label"></label>
         <input asp-for="IdFaktury" class="form-control" />

@@ -60,7 +60,7 @@ namespace BazyDanych1Projekt.Controllers
         public IActionResult AddOrEdit(int id = 0)
         {
             if (id == 0)
-                return View(new Faktura());
+                return View(new Faktura { IdFaktury = 0});
             else
             {
                 Faktura faktura = null;

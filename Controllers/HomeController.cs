@@ -340,5 +340,54 @@ namespace BazyDanych1Projekt.Controllers
 
             return View(sprawy_w_toku);
         }
+
+        public IActionResult KlienciFakturyPlatnosci()
+        {
+            var klienciFakturyPlatnosci = new List<KlientFakturaPlatnosc>();
+
+            try
+            {
+                string query = "SELECT * FROM KlienciFakturyPlatnosci";
+                using (var cmd = new NpgsqlCommand(query, _dbConnection))
+                {
+                    _dbConnection.Open();
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            klienciFakturyPlatnosci.Add(new KlientFakturaPlatnosc
+                            {
+                                IdKlienta = reader.GetInt32(0),
+                                Imie = reader.GetString(1),
+                                Nazwisko = reader.GetString(2),
+                                IdFaktury = reader.GetInt32(3),
+                                DataWystawienia = reader.GetDateTime(4),
+                                KwotaFaktury = reader.GetDecimal(5),
+                                Status = reader.GetString(6),
+                                IdPlatnosci = reader.IsDBNull(7) ? (int?)null : reader.GetInt32(7),
+                                DataPlatnosci = reader.IsDBNull(8) ? (DateTime?)null : reader.GetDateTime(8),
+                                KwotaPlatnosci = reader.IsDBNull(9) ? (decimal?)null : reader.GetDecimal(9)
+                            });
+                        }
+                    }
+                }
+            }
+            catch (PostgresException ex)
+            {
+                Console.WriteLine(ex.Message);
+                ViewData["ErrorMessage"] = "An error occurred while retrieving the records: " + ex.Message;
+                return View("Error");
+            }
+            finally
+            {
+                if (_dbConnection.State == System.Data.ConnectionState.Open)
+                {
+                    _dbConnection.Close();
+                }
+            }
+
+            return View(klienciFakturyPlatnosci);
+        }
+
     }
 }

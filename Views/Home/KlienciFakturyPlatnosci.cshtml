@@ -1,0 +1,84 @@
+﻿@model IEnumerable<BazyDanych1Projekt.Models.KlientFakturaPlatnosc>
+
+@{
+    ViewData["Title"] = "KlienciFakturyPlatnosci";
+}
+
+<h1>KlienciFakturyPlatnosci</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdKlienta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Imie)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nazwisko)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdFaktury)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataWystawienia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KwotaFaktury)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdPlatnosci)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataPlatnosci)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KwotaPlatnosci)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdKlienta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Imie)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nazwisko)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdFaktury)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataWystawienia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KwotaFaktury)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdPlatnosci)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataPlatnosci)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KwotaPlatnosci)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

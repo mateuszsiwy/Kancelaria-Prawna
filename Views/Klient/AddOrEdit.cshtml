@@ -5,7 +5,7 @@
 
 <form asp-action="AddOrEdit">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
+    @Html.HiddenFor(model => model.IdKlienta)
     <div class="form-group">
         <label asp-for="Imie" class="control-label"></label>
         <input asp-for="Imie" class="form-control" />
