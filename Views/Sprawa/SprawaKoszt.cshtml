@@ -1,0 +1,19 @@
+@model BazyDanych1Projekt.Models.SprawaKoszt
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Koszt Sprawy</title>
+</head>
+<body>
+    <h1>Koszt Sprawy</h1>
+    @if (Model != null)
+    {
+        <h2>Wynik</h2>
+        <p>Id Sprawy: @Model.IdSprawy</p>
+        <p>Koszt: @Model.TotalCost</p>
+    }
+</body>
+</html>

@@ -65,6 +65,10 @@ namespace BazyDanych1Projekt.Controllers
                         prawnik.IdPrawnika = reader.GetInt32(0);
                         prawnik.Imie = reader.GetString(1);
                         prawnik.Nazwisko = reader.GetString(2);
+                        prawnik.Specjalizacja = reader.IsDBNull(3) ? null : reader.GetString(3);
+                        prawnik.Stanowisko = reader.IsDBNull(4) ? null : reader.GetString(4);
+                        prawnik.StawkaGodzinowa = reader.IsDBNull(5) ? (decimal?)null : reader.GetDecimal(5);
+                        prawnik.DataZatrudnienia = reader.GetDateTime(6);
                     }
                     return View(prawnik);
                 }
@@ -97,6 +101,10 @@ namespace BazyDanych1Projekt.Controllers
                         _dbConnection.Open();
                         cmd.Parameters.AddWithValue("imie", prawnik.Imie);
                         cmd.Parameters.AddWithValue("nazwisko", prawnik.Nazwisko);
+                        cmd.Parameters.AddWithValue("specjalizacja", prawnik.Specjalizacja ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("stanowisko", prawnik.Stanowisko ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("stawka_godzinowa", prawnik.StawkaGodzinowa ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("data_zatrudnienia", prawnik.DataZatrudnienia);
                         cmd.ExecuteNonQuery();
                     }
                 }
@@ -106,9 +114,13 @@ namespace BazyDanych1Projekt.Controllers
                     using (var cmd = new NpgsqlCommand(query, _dbConnection))
                     {
                         _dbConnection.Open();
+                        cmd.Parameters.AddWithValue("id", prawnik.IdPrawnika);
                         cmd.Parameters.AddWithValue("imie", prawnik.Imie);
                         cmd.Parameters.AddWithValue("nazwisko", prawnik.Nazwisko);
-                        cmd.Parameters.AddWithValue("id", prawnik.IdPrawnika);
+                        cmd.Parameters.AddWithValue("specjalizacja", prawnik.Specjalizacja ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("stanowisko", prawnik.Stanowisko ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("stawka_godzinowa", prawnik.StawkaGodzinowa ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("data_zatrudnienia", prawnik.DataZatrudnienia);
                         cmd.ExecuteNonQuery();
                     }
                 }

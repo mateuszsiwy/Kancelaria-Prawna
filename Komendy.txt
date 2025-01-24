@@ -121,7 +121,7 @@ CREATE OR REPLACE VIEW prawnicy_sprawy AS SELECT pr.id_prawnika, pr.imie, pr.naz
                     RETURN NEW;
                 END;
                 $$ LANGUAGE plpgsql;
-
+                
                 CREATE TRIGGER trigger_loguj_zmiany_sprawy
                 AFTER UPDATE ON Sprawa
                 FOR EACH ROW
@@ -137,3 +137,9 @@ CREATE OR REPLACE VIEW prawnicy_sprawy AS SELECT pr.id_prawnika, pr.imie, pr.naz
 
                 INSERT INTO Platnosc (id_faktury, data_platnosci, kwota) VALUES
                 (2, '2023-02-15', 1500.00);
+
+
+                ALTER TABLE Sprawa
+                ADD CONSTRAINT fk_sprawa_klient 
+                FOREIGN KEY (id_klienta) 
+                REFERENCES Klient(id_klienta);

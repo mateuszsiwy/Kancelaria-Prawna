@@ -4,11 +4,11 @@ using BazyDanych1Projekt.Models;
 
 namespace BazyDanych1Projekt.Controllers
 {
-    public class Sprawy_PrawnicyController : Controller
+    public class PrawnicySprawyController : Controller
     {
         private readonly NpgsqlConnection _dbConnection;
 
-        public Sprawy_PrawnicyController(NpgsqlConnection dbConnection)
+        public PrawnicySprawyController(NpgsqlConnection dbConnection)
         {
             _dbConnection = dbConnection;
         }
@@ -72,6 +72,8 @@ namespace BazyDanych1Projekt.Controllers
                             przypisane.IdPrzypisane = reader.GetInt32(0);
                             przypisane.IdSprawy = reader.GetInt32(1);
                             przypisane.IdPrawnika = reader.GetInt32(2);
+                            przypisane.Rola = reader.GetString(3);
+                            przypisane.DataPrzypisania = reader.GetDateTime(4);
                         }
                         return View(przypisane);
                     }
@@ -110,13 +112,15 @@ namespace BazyDanych1Projekt.Controllers
                 }
                 else
                 {
-                    string query = "UPDATE przypisane SET id_sprawy = @id_sprawy, id_prawnika = @id_prawnika WHERE id_przypisane = @id_przypisane";
+                    string query = "UPDATE przypisane SET id_sprawy = @id_sprawy, id_prawnika = @id_prawnika, rola = @rola, data_przypisania = @data_przypisania WHERE id_przypisane = @id_przypisane";
                     using (var cmd = new NpgsqlCommand(query, _dbConnection))
                     {
                         _dbConnection.Open();
                         cmd.Parameters.AddWithValue("id_sprawy", przypisane.IdSprawy);
                         cmd.Parameters.AddWithValue("id_prawnika", przypisane.IdPrawnika);
                         cmd.Parameters.AddWithValue("id_przypisane", przypisane.IdPrzypisane);
+                        cmd.Parameters.AddWithValue("rola", przypisane.Rola);
+                        cmd.Parameters.AddWithValue("data_przypisania", przypisane.DataPrzypisania);
                         cmd.ExecuteNonQuery();
                     }
                 }

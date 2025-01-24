@@ -1,8 +1,6 @@
 ﻿@model BazyDanych1Projekt.Models.Przypisane
 
-
-
-<h1>AddOrEdit</h1>
+<h1>Add or Edit Przypisane</h1>
 
 <h4>Przypisane</h4>
 <hr />
@@ -22,6 +20,16 @@
                 <span asp-validation-for="IdPrawnika" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Rola" class="control-label"></label>
+                <input asp-for="Rola" class="form-control" />
+                <span asp-validation-for="Rola" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataPrzypisania" class="control-label"></label>
+                <input asp-for="DataPrzypisania" class="form-control" />
+                <span asp-validation-for="DataPrzypisania" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
@@ -31,5 +39,3 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
-

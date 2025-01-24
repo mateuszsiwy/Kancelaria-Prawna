@@ -1,7 +1,6 @@
 ﻿@model BazyDanych1Projekt.Models.Prawnik
 
-
-<h1>AddOrEdit</h1>
+<h1>Add or Edit Prawnik</h1>
 
 <h4>Prawnik</h4>
 <hr />
@@ -9,11 +8,6 @@
     <div class="col-md-4">
         <form asp-action="AddOrEdit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-@*             <div class="form-group">
-                <label asp-for="IdPrawnika" class="control-label"></label>
-                <input asp-for="IdPrawnika" class="form-control" />
-                <span asp-validation-for="IdPrawnika" class="text-danger"></span>
-            </div> *@
             @Html.HiddenFor(model => model.IdPrawnika)
             <div class="form-group">
                 <label asp-for="Imie" class="control-label"></label>
@@ -26,6 +20,26 @@
                 <span asp-validation-for="Nazwisko" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Specjalizacja" class="control-label"></label>
+                <input asp-for="Specjalizacja" class="form-control" />
+                <span asp-validation-for="Specjalizacja" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stanowisko" class="control-label"></label>
+                <input asp-for="Stanowisko" class="form-control" />
+                <span asp-validation-for="Stanowisko" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StawkaGodzinowa" class="control-label"></label>
+                <input asp-for="StawkaGodzinowa" class="form-control" />
+                <span asp-validation-for="StawkaGodzinowa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataZatrudnienia" class="control-label"></label>
+                <input asp-for="DataZatrudnienia" class="form-control" />
+                <span asp-validation-for="DataZatrudnienia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
@@ -35,5 +49,3 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
-

@@ -18,6 +18,10 @@
                 <th>Id</th>
                 <th>Imię</th>
                 <th>Nazwisko</th>
+                <th>Specjalizacja</th>
+                <th>Stanowisko</th>
+                <th>Stawka godzinowa</th>
+                <th>Data zatrudnienia</th>
             </tr>
         </thead>
         <tbody>
@@ -27,6 +31,10 @@
                     <td>@prawnik.IdPrawnika</td>
                     <td>@prawnik.Imie</td>
                     <td>@prawnik.Nazwisko</td>
+                    <td>@prawnik.Specjalizacja</td>
+                    <td>@prawnik.Stanowisko</td>
+                    <td>@prawnik.StawkaGodzinowa</td>
+                    <td>@prawnik.DataZatrudnienia</td>
                     <td><a asp-action="AddOrEdit" asp-controller="prawnik" asp-route-id="@prawnik.IdPrawnika">Edytuj</a></td>
                     <td><a asp-action="delete" asp-controller="prawnik" asp-route-id="@prawnik.IdPrawnika">Usun</a></td>
                 </tr>

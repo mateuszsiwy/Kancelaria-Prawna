@@ -1,4 +1,4 @@
-﻿@model List<Sprawa>
+﻿@model List<BazyDanych1Projekt.Models.Sprawa>
 
 <!DOCTYPE html>
 <html lang="pl">
@@ -13,14 +13,20 @@
     <a asp-action="AddOrEdit" asp-controller="sprawa">Dodaj nowa sprawe</a>
     <br/>
 
-
     <table class="table" border="1">
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Tytul</th>
                 <th>Opis</th>
+                <th>Data rozpoczecia</th>
                 <th>Data zakonczenia</th>
+                <th>Status</th>
+                <th>Priorytet</th>
+                <th>Wynik</th>
                 <th>Stopien wynagrodzenia</th>
+                <th>Id klienta</th>
+                <th>Akcje</th>
             </tr>
         </thead>
         <tbody>
@@ -28,11 +34,20 @@
             {
                 <tr>
                     <td>@sprawa.IdSprawy</td>
+                    <td>@sprawa.Tytul</td>
                     <td>@sprawa.Opis</td>
+                    <td>@sprawa.DataRozpoczecia</td>
                     <td>@sprawa.DataZakonczenia</td>
+                    <td>@sprawa.Status</td>
+                    <td>@sprawa.Priorytet</td>
+                    <td>@sprawa.Wynik</td>
                     <td>@sprawa.StopienWynagrodzenia</td>
-                    <td><a asp-action="AddOrEdit" asp-controller="sprawa" asp-route-id="@sprawa.IdSprawy">Edytuj</a></td>
-                    <td><a asp-action="delete" asp-controller="sprawa" asp-route-id="@sprawa.IdSprawy">Usun</a></td>
+                    <td>@sprawa.IdKlienta</td>
+                    <td>
+                        <a asp-action="AddOrEdit" asp-controller="sprawa" asp-route-id="@sprawa.IdSprawy">Edytuj</a> |
+                        <a asp-action="Delete" asp-controller="sprawa" asp-route-id="@sprawa.IdSprawy">Usun</a> |
+                        <a asp-action="SprawaKoszt" asp-controller="sprawa" asp-route-IdSprawy="@sprawa.IdSprawy">Policz Koszt</a>
+                    </td>
                 </tr>
             }
         </tbody>

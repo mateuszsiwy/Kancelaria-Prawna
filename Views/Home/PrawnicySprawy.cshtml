@@ -1,0 +1,59 @@
+@model List<BazyDanych1Projekt.Models.PrawnicySprawy>
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prawnicy Przypisani do Spraw</title>
+</head>
+<body>
+    <h1>Prawnicy Przypisani do Spraw</h1>
+    <p>
+        <a asp-action="AddOrEdit" asp-controller="prawnicysprawy">Dodaj przypisanie</a>
+    </p>
+    <table class="table" border="1">
+        <thead>
+            <tr>
+                <th>Id Prawnika</th>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+                <th>Stanowisko</th>
+                <th>Id Sprawy</th>
+                <th>Tytuł</th>
+                <th>Opis</th>
+                <th>Data Rozpoczęcia</th>
+                <th>Data Zakończenia</th>
+                <th>Status</th>
+                <th>Priorytet</th>
+                <th>Wynik</th>
+                <th>Rola</th>
+                <th>Data Przypisania</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.IdPrawnika</td>
+                    <td>@item.Imie</td>
+                    <td>@item.Nazwisko</td>
+                    <td>@item.Stanowisko</td>
+                    <td>@item.IdSprawy</td>
+                    <td>@item.Tytul</td>
+                    <td>@item.Opis</td>
+                    <td>@item.DataRozpoczecia</td>
+                    <td>@item.DataZakonczenia</td>
+                    <td>@item.Status</td>
+                    <td>@item.Priorytet</td>
+                    <td>@item.Wynik</td>
+                    <td>@item.Rola</td>
+                    <td>@item.DataPrzypisania</td>
+                    <td><a asp-action="AddOrEdit" asp-controller="prawnicysprawy" asp-route-IdPrawnika="@item.IdPrawnika" asp-route-IdSprawy="@item.IdSprawy">Edytuj</a></td>
+                    <td><a asp-action="Delete" asp-controller="prawnicysprawy" asp-route-IdPrawnika="@item.IdPrawnika" asp-route-IdSprawy="@item.IdSprawy">Usun</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
