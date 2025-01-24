@@ -143,3 +143,7 @@ CREATE OR REPLACE VIEW prawnicy_sprawy AS SELECT pr.id_prawnika, pr.imie, pr.naz
                 ADD CONSTRAINT fk_sprawa_klient 
                 FOREIGN KEY (id_klienta) 
                 REFERENCES Klient(id_klienta);
+
+
+
+                

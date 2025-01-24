@@ -93,16 +93,13 @@ public class InitializacjaBazyDanych
                 ADD COLUMN IF NOT EXISTS rola VARCHAR(50) DEFAULT 'Assistant',
                 ADD COLUMN IF NOT EXISTS data_przypisania DATE DEFAULT CURRENT_DATE;
 
-                -- Dodanie nowej tabeli CzasPracy
-                CREATE TABLE IF NOT EXISTS CzasPracy (
-                    id_czasu SERIAL PRIMARY KEY,
-                    id_prawnika INT REFERENCES Prawnik(id_prawnika),
-                    id_sprawy INT REFERENCES Sprawa(id_sprawy),
-                    data DATE NOT NULL,
-                    liczba_godzin DECIMAL(4,2) NOT NULL,
-                    opis_czynnosci TEXT,
-                    CONSTRAINT fk_czas_prawnik FOREIGN KEY (id_prawnika) REFERENCES Prawnik(id_prawnika),
-                    CONSTRAINT fk_czas_sprawa FOREIGN KEY (id_sprawy) REFERENCES Sprawa(id_sprawy)
+
+                create table if not exists CzasPracy(
+                id_czasu serial primary key,
+                id_przypisane int not null references przypisane(id_przypisane),
+                data date,
+                liczba_godzin decimal,
+                opis_czynnosci varchar(100)
                 );
             ";
             using (var command = new NpgsqlCommand(createTablesQuery, connection))
@@ -130,7 +127,7 @@ public class InitializacjaBazyDanych
                 CREATE TRIGGER enforce_one_lead
                 BEFORE INSERT OR UPDATE ON Przypisane
                 FOR EACH ROW EXECUTE FUNCTION check_lead_lawyer();
-
+            
                 -- Funkcja obliczająca koszt sprawy
                 CREATE OR REPLACE FUNCTION oblicz_koszt_sprawy(sprawa_id INT) 
                 RETURNS DECIMAL AS $$
@@ -140,11 +137,14 @@ public class InitializacjaBazyDanych
                     SELECT SUM(cp.liczba_godzin * p.stawka_godzinowa)
                     INTO total_cost
                     FROM CzasPracy cp
-                    JOIN Prawnik p ON cp.id_prawnika = p.id_prawnika
-                    WHERE cp.id_sprawy = sprawa_id;
+                    JOIN Przypisane prz ON cp.id_przypisane = prz.id_przypisane
+                    JOIN Prawnik p ON prz.id_prawnika = p.id_prawnika
+                    WHERE prz.id_sprawy = sprawa_id;
+                    
                     RETURN COALESCE(total_cost, 0);
                 END;
                 $$ LANGUAGE plpgsql;
+
 
 
                 CREATE OR REPLACE VIEW PrawnicySprawyView AS
