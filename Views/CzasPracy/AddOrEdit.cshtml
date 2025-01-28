@@ -1,0 +1,39 @@
+@model BazyDanych1Projekt.Models.CzasPracy
+
+@{
+    ViewData["Title"] = Model.IdCzasPracy == 0 ? "Dodaj Czas Pracy" : "Edytuj Czas Pracy";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@Html.HiddenFor(model => model.IdCzasPracy)
+
+<form asp-action="AddOrEdit">
+    <div class="form-group">
+        <label asp-for="IdPrzypisane" class="control-label"></label>
+        <input asp-for="IdPrzypisane" class="form-control" />
+        <span asp-validation-for="IdPrzypisane" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Data" class="control-label"></label>
+        <input asp-for="Data" class="form-control" />
+        <span asp-validation-for="Data" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LiczbaGodzin" class="control-label"></label>
+        <input asp-for="LiczbaGodzin" class="form-control" />
+        <span asp-validation-for="LiczbaGodzin" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="OpisCzynnosci" class="control-label"></label>
+        <input asp-for="OpisCzynnosci" class="form-control" />
+        <span asp-validation-for="OpisCzynnosci" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Zapisz" class="btn btn-primary" />
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Powrót do listy</a>
+</div>

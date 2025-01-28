@@ -161,7 +161,7 @@ namespace BazyDanych1Projekt.Controllers
             {
                     string query = @"
                     SELECT 
-                        id_prawnika, imie, nazwisko, stanowisko,
+                        id_przypisane, id_prawnika, imie, nazwisko, stanowisko,
                         id_sprawy, tytul, opis, data_rozpoczecia, data_zakonczenia, status, priorytet, wynik,
                         rola, data_przypisania
                     FROM PrawnicySprawyView";
@@ -175,20 +175,21 @@ namespace BazyDanych1Projekt.Controllers
                         {
                             prawnicySprawyList.Add(new PrawnicySprawy
                             {
-                                IdPrawnika = reader.GetInt32(0),
-                                Imie = reader.GetString(1),
-                                Nazwisko = reader.GetString(2),
-                                Stanowisko = reader.GetString(3),
-                                IdSprawy = reader.GetInt32(4),
-                                Tytul = reader.GetString(5),
-                                Opis = reader.GetString(6),
-                                DataRozpoczecia = reader.GetDateTime(7),
-                                DataZakonczenia = reader.IsDBNull(8) ? (DateTime?)null : reader.GetDateTime(8),
-                                Status = reader.GetString(9),
-                                Priorytet = reader.GetInt32(10),
-                                Wynik = reader.IsDBNull(11) ? null : reader.GetString(11),
-                                Rola = reader.GetString(12),
-                                DataPrzypisania = reader.GetDateTime(13)
+                                IdPrzypisane = reader.GetInt32(0),
+                                IdPrawnika = reader.GetInt32(1),
+                                Imie = reader.GetString(2),
+                                Nazwisko = reader.GetString(3),
+                                Stanowisko = reader.GetString(4),
+                                IdSprawy = reader.GetInt32(5),
+                                Tytul = reader.GetString(6),
+                                Opis = reader.GetString(7),
+                                DataRozpoczecia = reader.GetDateTime(8),
+                                DataZakonczenia = reader.IsDBNull(9) ? (DateTime?)null : reader.GetDateTime(9),
+                                Status = reader.GetString(10),
+                                Priorytet = reader.GetInt32(11),
+                                Wynik = reader.IsDBNull(12) ? null : reader.GetString(12),
+                                Rola = reader.GetString(13),
+                                DataPrzypisania = reader.GetDateTime(14)
                             });
                         }
                     }

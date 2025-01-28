@@ -2,6 +2,7 @@ namespace BazyDanych1Projekt.Models
 {
     public class PrawnicySprawy
     {
+        public int IdPrzypisane { get; set; }
         public int IdPrawnika { get; set; }
         public string Imie { get; set; }
         public string Nazwisko { get; set; }

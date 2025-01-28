@@ -1,0 +1,39 @@
+@model IEnumerable<BazyDanych1Projekt.Models.CzasPracy>
+
+@{
+    ViewData["Title"] = "Czas Pracy";
+}
+
+<h1>Czas Pracy</h1>
+
+<p>
+    <a asp-action="AddOrEdit">Dodaj Czas Pracy</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id Czasu</th>
+            <th>Id Przypisane</th>
+            <th>Data</th>
+            <th>Liczba Godzin</th>
+            <th>Opis Czynnosci</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>@item.IdCzasPracy</td>
+            <td>@item.IdPrzypisane</td>
+            <td>@item.Data</td>
+            <td>@item.LiczbaGodzin</td>
+            <td>@item.OpisCzynnosci</td>
+            <td>
+                <a asp-action="AddOrEdit" asp-route-id="@item.IdCzasPracy">Edytuj</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdCzasPracy">Usuń</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

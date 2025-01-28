@@ -15,6 +15,7 @@
     <table class="table" border="1">
         <thead>
             <tr>
+                <th>Id Przypisane</th>
                 <th>Id Prawnika</th>
                 <th>Imię</th>
                 <th>Nazwisko</th>
@@ -35,6 +36,7 @@
             @foreach (var item in Model)
             {
                 <tr>
+                    <td>@item.IdPrzypisane</td>
                     <td>@item.IdPrawnika</td>
                     <td>@item.Imie</td>
                     <td>@item.Nazwisko</td>

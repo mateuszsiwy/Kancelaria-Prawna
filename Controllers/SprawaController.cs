@@ -167,6 +167,12 @@ namespace BazyDanych1Projekt.Controllers
                     cmd.Parameters.AddWithValue("id_sprawy", IdSprawy);
                     sprawaKoszt.TotalCost = (decimal)cmd.ExecuteScalar();
                 }
+            string sql = "SELECT utworz_fakture_dla_sprawy(@sprawaId);";
+            using (var command = new NpgsqlCommand(sql, _dbConnection))
+            {
+                command.Parameters.AddWithValue("sprawaId", IdSprawy);
+                command.ExecuteNonQuery();
+            }
             }
             catch (PostgresException ex)
             {
