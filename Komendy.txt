@@ -1,4 +1,4 @@
-CREATE OR REPLACE VIEW prawnicy_sprawy AS SELECT pr.id_prawnika, pr.imie, pr.nazwisko, s.id_sprawy, s.opis, s.data_zakonczenia, s.stopien_wynagrodzenia 
+		CREATE OR REPLACE VIEW prawnicy_sprawy AS SELECT pr.id_prawnika, pr.imie, pr.nazwisko, s.id_sprawy, s.opis, s.data_zakonczenia, s.stopien_wynagrodzenia 
                 FROM prawnik pr JOIN przypisane p ON pr.id_prawnika = p.id_prawnika
                     JOIN sprawa s on p.id_sprawy = s.id_sprawy;
                 
