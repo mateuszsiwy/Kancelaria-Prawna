@@ -19,7 +19,6 @@
 - **Backend:** ASP.NET Core, Entity Framework Core, Npgsql
 - **Frontend:** HTML, CSS
 - **Baza danych:** PostgreSQL
-- **Inne:** Tembo.io
 
 ---
 
