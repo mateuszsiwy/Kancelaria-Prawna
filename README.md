@@ -22,7 +22,7 @@
 
 ---
 
-## 🖼️ Diagram ERD
+## 🖼️ ERD
 
 
 ![ERD Placeholder](./erd-diagram.png)  
